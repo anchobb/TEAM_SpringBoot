@@ -55,13 +55,13 @@ public class UserController {
 				model.addAttribute(error.getField(), error.getDefaultMessage());
 
 			}
-			return "/user/join";
+			return "user/join";
 		}
 
 		//03
 		boolean isjoin =  userService.joinMember(dto,model,request);
 		if(!isjoin){
-			return "/user/join";
+			return "user/join";
 		}
 
 		//04

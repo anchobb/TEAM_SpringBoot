@@ -54,9 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/css/**","/js/**","/images/**").permitAll()
 				.antMatchers("/","/login","/user/join","/logout").permitAll()
 				.antMatchers("/user/**").permitAll()
-				.antMatchers("/qna/list","/notice/list").permitAll()
-				.antMatchers("/qna/read","/qna/post","/qna/delete","/qna/update","/notice/read").hasAnyRole("USER","ADMIN","MEMBER")
-				.antMatchers("/notice/post","/notice/delete","/notice/update").hasAnyRole("MEMBER","ADMIN")
+				.antMatchers("/qna/list","/notice/list","/notice/post", "/notice/read","/notice/update","/notice/delete").permitAll()
+				.antMatchers("/qna/read","/qna/post","/qna/delete","/qna/update").hasAnyRole("USER","ADMIN","MEMBER")
+//				.antMatchers("/notice/delete").hasAnyRole("MEMBER","ADMIN")
 
 
 				.anyRequest().authenticated()									//나머지 URL은 모두 인증작업이 완료된 이후 접근가능
@@ -89,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.rememberMeParameter("remember-me")
 				.tokenValiditySeconds(60*60)
 				.alwaysRemember(false)
-				.tokenRepository(tokenRepository())
+//				.tokenRepository(tokenRepository())
 				.userDetailsService(principalDetailsOAuth2Service)
 
 			.and()
@@ -141,13 +141,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	//REMEMBER ME BEAN 추가
 
-	@Bean
+	/*@Bean
 	public PersistentTokenRepository tokenRepository() {
 		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
 		repo.setDataSource(dataSource);
 		//repo.setCreateTableOnStartup(true);
 		return repo;
-	}
+	}*/
 
 
 	

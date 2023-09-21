@@ -113,7 +113,7 @@ public class QnAController {
                 log.info(error.getField()+ " : " + error.getDefaultMessage());
                 model.addAttribute(error.getField(), error.getDefaultMessage());
             }
-            return "/qna/post";
+            return "qna/post";
         }
 
         //서비스 실행
@@ -215,7 +215,7 @@ public class QnAController {
             }
         }
 
-        return "/qna/read";
+        return "qna/read";
 
     }
 
@@ -288,7 +288,7 @@ public class QnAController {
                 log.info(error.getField()+ " : " + error.getDefaultMessage());
                 model.addAttribute(error.getField(), error.getDefaultMessage());
             }
-            return "/qna/read";
+            return "qna/read";
         }
 
         //서비스 실행

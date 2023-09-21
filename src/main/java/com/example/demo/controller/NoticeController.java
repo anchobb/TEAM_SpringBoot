@@ -102,7 +102,7 @@ public class NoticeController {
                 log.info(error.getField()+ " : " + error.getDefaultMessage());
                 model.addAttribute(error.getField(), error.getDefaultMessage());
             }
-            return "/notice/post";
+            return "notice/post";
         }
         //서비스 실행
         boolean isadded = noticeService.addNotice(dto);
@@ -183,7 +183,7 @@ public class NoticeController {
         }
         model.addAttribute("noticeDto",dto);
 
-        return "/notice/read";
+        return "notice/read";
     }
 
 

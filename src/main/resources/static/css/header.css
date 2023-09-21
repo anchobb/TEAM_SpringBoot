@@ -210,13 +210,7 @@
     background-color: gray;
     height: 3px;
     width: 100%;
-    margin: 5px auto;
-}
-
-.wrapper>footer>#footer_logo{
-    border: 1px solid;
-    opacity: 0.6;
-    margin-bottom: 500px;
+    margin: 10px auto;
 }
 
 
