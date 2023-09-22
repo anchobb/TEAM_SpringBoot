@@ -106,19 +106,19 @@
             <div id="notice">공지사항</div>
             <div class="notice-post-body">
                 <form action="/notice/post" method="post" enctype="multipart/form-data">
-                    <label for="ex2" class="form-label">공지 제목</label>&nbsp;&nbsp;<span class="msg" th:text="${title}"></span>
-                    <div class="input-group mb-3">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;분류&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">안내</a></li>
-                            <li><a class="dropdown-item" href="#">서비스 점검</a></li>
-                            <li><a class="dropdown-item" href="#">서비스 오픈</a></li>
-                            <li><a class="dropdown-item" href="#">서비스 종료</a></li>
-                        </ul>
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button" id="ex2" placeholder="제목을 입력하세요" name="title">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">공지 제목</label>
+                            <div style="display:flex;">
+                            <select class="category" name="category">
+                                <option selected>분류</option>
+                                <option value="안내">안내</option>
+                                <option value="서비스 점검">서비스 점검</option>
+                                <option value="서비스 오픈">서비스 오픈</option>
+                                <option value="서비스 종료">서비스 종료</option>
+                            </select>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요" name="title">
+                            </div>
                     </div>
-
-
                     <div class="mb-3 w-100">
                         <label for="exampleFormControlTextarea1" class="form-label">공지 내용</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="content"></textarea>
@@ -127,12 +127,12 @@
                         <label for="formFile" class="form-label">파일 업로드</label>
                         <input class="form-control" type="file" id="formFile" name="files" multiple>
                     </div>
-                    <div class="board-footer row position-relative">
+                    <div class="notice-footer row position-relative">
                         <!-- button -->
                         <div class="button">
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="Basic outlined example">
-                                <a type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;"  href="#">작성</a>
-                                <button type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;">이전</button>
+                                <button type="submit" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;" >작성</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;" href="javascript:history.go(-1)">이전</button>
                             </div>
                         </div>
 

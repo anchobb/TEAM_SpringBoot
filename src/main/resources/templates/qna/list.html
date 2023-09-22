@@ -1,29 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
     <!--  BS5  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <!-- favicon.ico   -->
-    <link rel="icon" href="/images/favicon/favicon_2xl.png" />
-
-    <!-- GOOGLE ICON    -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        .material-symbols-outlined {
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24
-        }
-    </style>
-
     <!-- common.css    -->
-    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/common.css" type="text/css">
+    <!-- header -->
+    <link rel="stylesheet" href="/css/header.css" type="text/css">
+    <!-- QnA_Page_Section -->
+    <link rel="stylesheet" href="/css/qna/list.css" type="text/css">
+    <!-- footer -->
+    <link rel="stylesheet" href="/css/footer.css" type="text/css">
 
 </head>
 <body>
@@ -31,212 +23,212 @@
 
 <div class="wrapper">
     <header>
-        <div class="top--header"></div>
-
-        <!-- NAV -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-success p-3 mb-1 header--nav"  >
-            <div class="container-fluid " >
-                <a class="navbar-brand text-white" href="#">HOME</a>
-                <button class="navbar-toggler  text-white ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item  ms-5">
-                            <a class="nav-link  text-white" href="/board/list">게시판</a>
-                        </li>
-                        <li class="nav-item  ms-5">
-                            <a class="nav-link  text-white"   href="#">이미지 게시판</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="top-header">
+            <a href="./index.html"><img class="logo" src="/images/로고.png" alt=""></a>
+            <div class="search_box">
+                <div>SEARCH</div>
+                <input type="text" placeholder="듣고 싶은 노래를 검색하세요!">
+                <a href=""><img src="/images/search.svg" alt=""></a>
             </div>
-            <!--
-                SEARCH
-            -->
-            <form class="d-flex" action="/board/list">
-                <select name="type"  class="form-select me-2" style="width:120px;">
-                    <option value="title" selected>TITLE</option>
-                    <option value="username">WRITER</option>
-                    <option value="content">CONTENTS</option>
-                </select>
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width:150px;" name="keyword">
-                <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
-
-
-            <!--
-            인증 버튼 추가
-             -->
-            <style>
-                .header--nav a{text-decoration:none;color:white;}
-            </style>
-            <!--인증된 경우 -->
-            <div  class="d-flex me-2" sec:authorize="isAuthenticated()"  style="display:flex;align-items:center;justify-content:right;font-size:0.8rem;width:800px;">
-                <div style="width:300px;text-align:right;">
-                    <span sec:authentication="principal.username" class="text-light"></span> <span class="text-light">님 </span>
-                </div>
-                &nbsp;&nbsp;
-                <div style="display:flex;align-items:center;justify-content:right;width:100px;">
-                    <a href="/user/mypage">나의 정보</a>
-                </div>
-                <form class="d-flex " action="/logout"  onSubmit="return false">
-                    <button  class="btn text-light"  style="width:120px; font-size:0.8rem;" onclick="logoutAndRedirect()">로그아웃</button>
-                </form>
-            </div>
-            <div class="d-flex me-2" sec:authorize="!isAuthenticated()"  style="display:flex;align-items:center;justify-content:right;font-size:0.8rem;width:400px;">
-                <div>
-                    <a href="/user/login">로그인</a>
-                </div>
-                &nbsp;&nbsp;
-                <div>
-                    <a href="/user/join">회원가입</a>
-                </div>
-            </div>
-            <script>
-                function logoutAndRedirect() {
-                      // 새 창 열기
-                   var newWindow = window.open('/logout', '_blank','width=450,height=450,top=1,right=100%');
-                   setTimeout(function() {
-                     // 1.5초후 창닫기
-                      newWindow.close();
-
-                     // 특정 지점으로 리다이렉션
-                 window.location.href = '/login';
-               }, 1500);
-
-                 }
-            </script>
-
-
-
-        </nav>
-
-
+            <ul>
+                <li><a href="" style="color:rgb(92, 115, 6); font-family: 'SDSamliphopangche_Basic'; font-size: 19px;"><img
+                        src="/images/add.svg" alt=""> 멤버십가입</a></li>
+                <li><a href=""><img src="/images/english.svg" alt="">ENGLISH</a></li>
+            </ul>
+        </div>
     </header>
-    <main>
-        <section class="row">
-            <!-- aside -->
-            <div class="bd-example bg-secondary col-2" style="height:90vh;width:200px;" >
-                <div class="btn-group-vertical p-3" role="group" aria-label="Vertical button group">
-                    <!--
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU1</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU2</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU3</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU4</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU5</button>
-                    <button type="button" class="btn btn-dark m-1" style="width:150px;">MENU6</button>
-                    -->
-                </div>
-            </div>
-            <!-- contents -->
-            <div class="col">
-                <!-- breadcrumb -->
-                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                    <ol class="breadcrumb mt-2">
-                        <li class="breadcrumb-item"><a href="#">HOME</a></li>
-                        <li class="breadcrumb-item"><a href="#">BOARD</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">LIST</li>
-                    </ol>
-                </nav>
 
-                <!-- title -->
-                <h3>BOARD LIST</h3>
-                <div>
-                    <div class="board-header">
-                        Page No (<span th:text="${pageNo}"></span> / <span th:text="${pageDto.totalpage}"></span> Page)
-                    </div>
-                    <div class="board-body">
-                        <!-- body -->
-                        <table class="table w-100">
-                            <thead>
-                            <tr>
-                                <th scope="col-1">NO</th>
-                                <th scope="col-2">SUBJECT</th>
-                                <th scope="col-2">WRITER</th>
-                                <th scope="col-2">DATE</th>
-                                <th scope="col-1">COUNT</th>
+    <!-- header nav -->
+    <nav>
+        <div class="navi">
+            <div class="Menu_left">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">수박차트</a>
+                        <ul class="two--depth">
+                            <li><a href="">국내TOP100</a></li>
+                            <li><a href="">해외TOP100</a></li>
+                            <li><a href="">최신음악</a></li>
+                            <li><a href="">장르음악</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박DJ</a>
+                        <ul class="two--depth">
+                            <li><a href="">#투데이</a></li>
+                            <li><a href="">테마장르</a></li>
+                            <li><a href="">인기선곡</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박TV</a>
+                        <ul class="two--depth">
+                            <li><a href="">뮤직비디오</a></li>
+                            <li><a href="">수박방송</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">수박매거진</a>
+                        <ul class="two--depth">
+                            <li><a href="">오늘의매거진</a></li>
+                            <li><a href="">완결매거진</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="Menu_right">
+                <ul class="one--depth">
+                    <li>
+                        <a href="">공지사항</a>
+                        <ul class="two--depth">
+                            <li><a href="">공지사항</a></li>
+                            <li><a href="">QnA</a></li>
+                            <li><a href="">자주하는질문</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">마이페이지</a>
+                        <ul class="two--depth">
+                            <li><a href="">정보수정</a></li>
+                            <li><a href="">마이리스트</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="header_line"></div>
+
+
+    <!-- SEARCH -->
+
+<section class="sec_1">
+    <form action="/qna/list">
+        <input type="hidden" name="pageNo" value="1"/>
+        <div class="QnA_search">
+            <select name="type"  class="selectbox" >
+                <option value="title" selected>TITLE</option>
+                <option value="username">WRITER</option>
+                <option value="content">CONTENTS</option>
+            </select>
+            <input type="search" name="keyword" placeholder="궁금한 점을 키워드로 검색하세요!">
+            <button type="submit">🔍</button>
+        </div>
+    </form>
+</section>
+
+    <section>
+
+        <!-- contents -->
+        <div class="sec_2">
+
+            <!-- title -->
+            <div id="qna">QnA</div>
+            <div>
+                <div class="qna-header">
+                    Page No (<span style="color:red;" th:text="${pageNo}"></span> / <span th:text="${pageDto.totalpage}"></span> Page)
+                </div>
+                <div class="qna-body">
+                    <!-- body -->
+                    <table class="table w-70">
+                        <thead>
+                        <tr>
+                            <th scope="col-1" style="width:80px;">NO</th>
+                            <th scope="col-2" style="width:250px;">TITLE</th>
+                            <th scope="col-2" style="width:100px;">WRITER</th>
+                            <th scope="col-2" style="width:100px;">DATE</th>
+                            <th scope="col-1" style="width:80px;">COUNT</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- QnA LIST ITEMS -->
+                        <th:block >
+                            <tr th:each="qnaDto : ${qnaList}">
+                                <td th:text="${qnaDto.no}"></td>
+                                <td><a th:href="@{/qna/read(no=${qnaDto.no})}"  th:text="${qnaDto.title}">  </a></td>
+                                <td th:text="${qnaDto.username}"></td>
+                                <td th:text="${qnaDto.regdate}"></td>
+                                <td th:text="${qnaDto.count}"></td>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </th:block>
 
-                                <!-- BOARD LIST ITEMS -->
-                                <th:block >
-                                    <tr th:each="boardDto : ${boardList}">
-                                        <td th:text="${boardDto.no}"></td>
-                                        <td><a th:href="@{/board/read(no=${boardDto.no},pageNo=${pageNo})}"  th:text="${boardDto.title}">  </a> </td>
-                                        <td th:text="${boardDto.username}"></td>
-                                        <td th:text="${boardDto.regdate}"></td>
-                                        <td th:text="${boardDto.count}"></td>
-                                    </tr>
-                                </th:block>
+                        </tbody>
+                    </table>
 
-
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                    <div class="board-footer row position-relative">
-
-                        <!--  -->
-                        <div class="pagenation col-9">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-
-
-                                    <!-- PREV -->
-                                    <li class="page-item" th:if="${pageDto.prev}">
-                                            <a class="page-link" th:href="@{/board/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                    </li>
-
-
-                                    <!-- PAGENATION -->
-                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                                            <a class="page-link" th:href="@{/board/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
-                                    </li>
-
-
-
-                                    <!-- NEXT -->
-                                    <li class="page-item"  th:if="${pageDto.next}">
-
-                                        <a class="page-link" th:href="@{/board/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-
-                                    </li>
-
-
-
-                                </ul>
-                            </nav>
-                        </div>
-                        <!--  -->
-                        <div class="button--group col-2">
-                            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <a type="button" class="btn btn-outline-primary m-2" style="width:100px;"  href="/board/post">글쓰기</a>
-                                <button type="button" class="btn btn-outline-primary m-2" style="width:100px;">처음으로</button>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
 
+                <div class="qna-footer row position-relative">
 
+                    <!-- post btn -->
+                    <div class="button">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end" aria-label="Basic outlined example">
+                            <a th:href="@{/qna/post}"   type="button" class="btn btn-outline-danger btn-sm" style="width:80px; margin-top:10px;">글쓰기</a>
+                        </div>
+                    </div>
+
+
+                    <!-- pagenation -->
+
+                    <div class="pagenation">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+
+                                <!-- PREV      -->
+                                <li class="page-item" th:if="${pageDto.prev}">
+                                    <a class="page-link" th:href="@{/qna/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+
+
+                                <!-- PAGENATION -->
+                                <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
+                                    <a class="page-link" th:href="@{/qna/list(pageNo=${i},type=${pageDto.criteria.type},keyword=${pageDto.criteria.keyword} )}" > <span th:text="${i}"></span> </a>
+                                </li>
+
+
+                                <!-- NEXT -->
+                                <li class="page-item"  th:if="${pageDto.next}">
+                                    <a class="page-link" th:href="@{/qna/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+
+
+
+                </div>
             </div>
-        </section>
-
-        <section class="">
 
 
-        </section>
-        <section></section>
-    </main>
+        </div>
+    </section>
+
+    <!-- footer -->
     <footer>
-
+        <div class="footer_line"></div>
+        <div>
+            <ul class="footer_menu">
+                <li><a href="">이용약관</a></li>
+                <li><a href="">고객센터</a></li>
+                <li><a href="">제휴/프로모션</a></li>
+                <li style="width:170px"><a href=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <p></p>
+        <div class="Site_info">
+            <img id="footer_logo" src="/images/로고.png" alt="">
+            <span class="Sitename">(주)WATERMELON MUSIC</span>
+            <span>대구광역시 중구 중앙대로 366 반월센트럴타워 10층</span>
+            <span>대표이사 : 윤치연, 김예솔, 이헌지, 최정기</span>
+            <span>사업자등록번호 : 024-04-02023</span>
+            <br>
+            <span>문의전화 : 1544-1111 (평일 09:00-18:00)</span>
+            <span>WATERMELON MUSIC으로 음악과 함께하는 즐거운 하루 보내세요!</span>
+        </div>
 
     </footer>
 

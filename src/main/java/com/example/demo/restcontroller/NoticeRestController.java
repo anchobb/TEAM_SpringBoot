@@ -54,7 +54,7 @@ public class NoticeRestController {
     // 수정하기
     //-------------------
     @PutMapping("/put/{no}/{filename}")
-    public void put(@PathVariable Long no, @PathVariable String filename){
+    public void put(@PathVariable String no, @PathVariable String filename){
         log.info("PUT /notice/put " + no + " " + filename);
         boolean isremoved =  noticeService.removeFile(no, filename);
 

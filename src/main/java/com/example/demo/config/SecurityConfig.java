@@ -10,6 +10,7 @@ import com.example.demo.config.auth.exceptionhandler.CustomAccessDeniedHandler;
 import com.example.demo.config.auth.exceptionhandler.CustomAuthenticationEntryPoint;
 import com.example.demo.config.auth.loginHandler.CustomAuthenticationFailureHandler;
 import com.example.demo.config.auth.loginHandler.CustomLoginSuccessHandler;
+import com.example.demo.config.auth.logoutHandler.CustomLogoutHandler;
 import com.example.demo.config.auth.logoutHandler.CustomLogoutSuccessHandler;
 import com.example.demo.config.auth.logoutHandler.OAuthLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/css/**","/js/**","/images/**").permitAll()
 				.antMatchers("/","/login","/user/join","/logout").permitAll()
 				.antMatchers("/user/**").permitAll()
-				.antMatchers("/qna/list","/notice/list","/notice/post", "/notice/read","/notice/update","/notice/delete").permitAll()
-				.antMatchers("/qna/read","/qna/post","/qna/delete","/qna/update").hasAnyRole("USER","ADMIN","MEMBER")
+				.antMatchers("/qna/list","/notice/list","/notice/post", "/notice/read","/notice/update","/notice/delete","/qna/read","/qna/post","/qna/delete","/qna/update").permitAll()
+//				.antMatchers("/qna/read","/qna/post","/qna/delete","/qna/update").hasAnyRole("USER","ADMIN","MEMBER")
 //				.antMatchers("/notice/delete").hasAnyRole("MEMBER","ADMIN")
 
 
@@ -73,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()
 			.logoutUrl("/logout")
 			.permitAll()
-			//.addLogoutHandler(new CustomLogoutHandler())						//세션초기화
+			.addLogoutHandler(new CustomLogoutHandler())						//세션초기화
 			.addLogoutHandler(new OAuthLogoutHandler())
 			.logoutSuccessHandler(new CustomLogoutSuccessHandler())				//기본위치로 페이지이동
 
@@ -89,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.rememberMeParameter("remember-me")
 				.tokenValiditySeconds(60*60)
 				.alwaysRemember(false)
-//				.tokenRepository(tokenRepository())
+				//.tokenRepository(tokenRepository())
 				.userDetailsService(principalDetailsOAuth2Service)
 
 			.and()
@@ -141,13 +142,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	//REMEMBER ME BEAN 추가
 
-	/*@Bean
-	public PersistentTokenRepository tokenRepository() {
-		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
-		repo.setDataSource(dataSource);
-		//repo.setCreateTableOnStartup(true);
-		return repo;
-	}*/
+	//@Bean
+	//public PersistentTokenRepository tokenRepository() {
+	//	JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
+	//	repo.setDataSource(dataSource);
+	//	//repo.setCreateTableOnStartup(true);
+	//	return repo;
+	//}
 
 
 	

@@ -128,7 +128,7 @@
                                 </div>
                                 <!-- 문자열을 쉼표(,)로 분할하고 각각의 항목을 출력합니다. -->
                                 <div th:each="i : ${#numbers.sequence(0, filenames.length-1)}" >
-                                    <a th:href="@{/board/download(filename=${filenames[i]})}">
+                                    <a th:href="@{/notice/download(filename=${filenames[i]})}">
                                         <span th:text="${filenames[i]}"> </span>&nbsp;&nbsp;
                                         ( <span th:text="${filesizes[i]}"> </span><span> Byte</span> )
                                     </a>
@@ -184,11 +184,11 @@
     const delete_btn_el = document.querySelector('.delete_btn');
     delete_btn_el.addEventListener('click',function(){
         const no = delete_btn_el.dataset.no;
-        axios.delete("/board/delete?no="+no)
+        axios.delete("/notice/delete?no="+no)
         .then(
             response=>{console.log(response);
                 if(response.status === 200){
-                    location.href="/board/list";
+                    location.href="/notice/list";
                 }
             }
         )

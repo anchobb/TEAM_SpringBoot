@@ -88,6 +88,7 @@ public class NoticeController {
     }
 
     //-------------------
+    // POST
     //-------------------
     @GetMapping("/post")
     public void post_get(){log.info("GET /notice/post");}

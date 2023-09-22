@@ -6,6 +6,7 @@ import com.example.demo.domain.dto.QnADto;
 import com.example.demo.domain.dto.Criteria;
 import com.example.demo.domain.dto.PageDto;
 import com.example.demo.domain.dto.ReplyDto;
+import com.example.demo.domain.entity.Notice;
 import com.example.demo.domain.entity.QnA;
 import com.example.demo.domain.entity.Reply;
 import com.example.demo.domain.repository.QnARepository;
@@ -373,11 +374,11 @@ public class QnAService {
     // COUNT
     //----------------------------------------------------------------
     @Transactional(rollbackFor = SQLException.class)
-    public void count(Long no) {
-        QnA qna =  qnaRepository.findById(no).get();
-        qna.setCount(qna.getCount()+1);
+    public void countUp(QnA qna) {
+        qna.setCount(qna.getCount()+1L);
         qnaRepository.save(qna);
     }
+
 
 
     //----------------------------------------------------------------

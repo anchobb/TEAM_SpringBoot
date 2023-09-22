@@ -147,8 +147,9 @@ public class NoticeService {
     }
 
     @Transactional(rollbackFor = SQLException.class)
-    public boolean removeFile(Long no, String filename) {
+    public boolean removeFile(String no, String filename) {
 
+        Long num = Long.parseLong(no);
         filename = filename.trim();
 
         //------------------------------------------------
@@ -163,7 +164,7 @@ public class NoticeService {
         //------------------------------------------------
         //DB도 지우고
         //------------------------------------------------
-        Notice readNotice = noticeRepository.findById(no).get();
+        Notice readNotice = noticeRepository.findById(num).get();
         String fn []=  readNotice.getFilename().split(",");
         String fs []=  readNotice.getFilesize().split(",");
 
@@ -311,10 +312,10 @@ public class NoticeService {
     @Transactional(rollbackFor = SQLException.class)
     public boolean removeNotice(Long no) {
         Notice notice = noticeRepository.findById(no).get();
-        String removePath =NoticeController.READ_NOTICE_DIR_PATH;
+        String removePath = NoticeController.READ_NOTICE_DIR_PATH;
 
         //파일 있으면삭제
-        if(notice.getDirpath()!=null) {
+        if (notice.getDirpath() != null) {
             File dir = new File(removePath);
             if (dir.exists()) {
                 File files[] = dir.listFiles();
@@ -330,8 +331,10 @@ public class NoticeService {
         return noticeRepository.existsById(no);
     }
 
-    //----------------------------------------------------------------
 
+
+
+    // COUNT UP
     @Transactional(rollbackFor = SQLException.class)
     public void countUp(Notice notice) {
         notice.setCount(notice.getCount()+1L);

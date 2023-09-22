@@ -103,6 +103,8 @@
     <!-- SEARCH -->
     <section class="sec_1">
         <form action="/notice/list">
+            <input type="hidden" name="pageNo" value="1" />
+            <input type="hidden" name="type" value="title"/>
             <div class="Notice_search">
                 <div>SEARCH</div>
                 <input type="search" name="keyword" placeholder="궁금한 점을 키워드로 검색하세요!">
@@ -135,7 +137,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- BOARD LIST ITEMS -->
+                            <!-- NOTICE LIST ITEMS -->
                             <th:block >
                                 <tr th:each="noticeDto : ${noticeList}">
                                     <td th:text="${noticeDto.no}"></td>
@@ -151,7 +153,7 @@
 
                     </div>
 
-                    <div class="board-footer row position-relative">
+                    <div class="notice-footer row position-relative">
 
                         <!-- post btn -->
                         <div class="button">
@@ -177,7 +179,7 @@
 
                                     <!-- PAGENATION -->
                                     <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                                        <a class="page-link" th:href="@{/notice/list(pageNo=${i})}" > <span th:text="${i}"></span> </a>
+                                        <a class="page-link" th:href="@{/notice/list(pageNo=${i},type=${pageDto.criteria.type},keyword=${pageDto.criteria.keyword} )}" > <span th:text="${i}"></span> </a>
                                     </li>
 
 

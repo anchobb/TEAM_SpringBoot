@@ -28,11 +28,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class QnAController {
 
-//    @Autowired
-//    private QnARepository qnaRepository;
-
-
-
     @Autowired
     private QnAService qnaService;
 
@@ -64,8 +59,10 @@ public class QnAController {
         //--------------------
         //Search
         //--------------------
-        criteria.setType(type);
-        criteria.setKeyword(keyword);
+        if(type!=null)
+            criteria.setType(type);
+        if(keyword!=null)
+            criteria.setKeyword(keyword);
 
 
         //서비스 실행
@@ -87,9 +84,9 @@ public class QnAController {
         //--------------------------------
         //COUNT UP - //쿠키 생성(/qna/read.do 새로고침시 조회수 반복증가를 막기위한용도)
         //--------------------------------
-        Cookie init = new Cookie("reading","true");
+        Cookie init = new Cookie("isRead","false");
         response.addCookie(init);
-        //--------------------------------
+
 
         return "qna/list";
     }
@@ -109,21 +106,16 @@ public class QnAController {
 
         //유효성 검사
         if(bindingResult.hasFieldErrors()) {
-            for(FieldError error  : bindingResult.getFieldErrors()) {
+            for( FieldError error  : bindingResult.getFieldErrors()) {
                 log.info(error.getField()+ " : " + error.getDefaultMessage());
                 model.addAttribute(error.getField(), error.getDefaultMessage());
             }
             return "qna/post";
         }
-
         //서비스 실행
-        boolean isadd = qnaService.addQnA(dto);
+        boolean isadded = qnaService.addQnA(dto);
 
-        if(isadd) {
-            return "redirect:/qna/list";
-        }
-        return "redirect:/qna/post";
-
+        return "redirect:/qna/list";
 
     }
 
@@ -179,44 +171,33 @@ public class QnAController {
        }
 
 
-       if(qna.getDirpath()!=null){
-           //model.addAttribute("dirpath",  qna.getDirpath());
-           //--------------------------------------------------------
-           // FILEDOWNLOAD 추가
-           //--------------------------------------------------------
-           this.READ_DIRECTORY_PATH = qna.getDirpath();
-       }
-       model.addAttribute("qnaDto",dto);
-       model.addAttribute("pageNo",pageNo);
+        if(qna.getDirpath()!=null)
+            READ_DIRECTORY_PATH = qna.getDirpath();
 
-
-        //-------------------
-        // COUNTUP
-        //-------------------
-
-        //쿠키 확인 후  CountUp(/qna/read.do 새로고침시 조회수 반복증가를 막기위한용도)
+        //--------------------------------------------------------
+        //COUNT UP
+        //--------------------------------------------------------
         Cookie[] cookies = request.getCookies();
         if(cookies!=null)
         {
-            for(Cookie cookie:cookies)
+            for(Cookie cookie : cookies)
             {
-                if(cookie.getName().equals("reading"))
+                if(cookie.getName().equals("isRead"))
                 {
-                    if(cookie.getValue().equals("true"))
+                    if(cookie.getValue().equals("false"))
                     {
-                        //CountUp
                         System.out.println("COOKIE READING TRUE | COUNT UP");
-                        qnaService.count(qna.getNo());
-                        //쿠키 value 변경
-                        cookie.setValue("false");
+                        qnaService.countUp(qna);
+                        cookie.setValue("true");
+
                         response.addCookie(cookie);
                     }
                 }
             }
         }
+        model.addAttribute("qnaDto",dto);
 
         return "qna/read";
-
     }
 
     @GetMapping("/update")
@@ -234,7 +215,7 @@ public class QnAController {
         dto.setRegdate(qna.getRegdate());
         dto.setUsername(qna.getUsername());
         dto.setCount(qna.getCount());
-
+        log.info("GET /qna/update dto : " + dto);
 
         System.out.println("FILENAMES : " + qna.getFilename());
         System.out.println("FILESIZES : " + qna.getFilesize());
@@ -267,13 +248,8 @@ public class QnAController {
         }
 
 
-        if(qna.getDirpath()!=null){
-            //model.addAttribute("dirpath",  qna.getDirpath());
-            //--------------------------------------------------------
-            // FILEDOWNLOAD 추가
-            //--------------------------------------------------------
-            this.READ_DIRECTORY_PATH = qna.getDirpath();
-        }
+        if(qna.getDirpath()!=null)
+            READ_DIRECTORY_PATH = qna.getDirpath();
 
         model.addAttribute("qnaDto",dto);
 
@@ -288,15 +264,14 @@ public class QnAController {
                 log.info(error.getField()+ " : " + error.getDefaultMessage());
                 model.addAttribute(error.getField(), error.getDefaultMessage());
             }
-            return "qna/read";
+            return "redirect:/qna/update?no="+dto.getNo();
         }
-
         //서비스 실행
-        boolean isadd = qnaService.updateQnA(dto);
+        boolean isUpdate = qnaService.updateQnA(dto);
 
-        if(isadd) {
+        if(isUpdate)
             return "redirect:/qna/read?no="+dto.getNo();
-        }
+
         return "redirect:/qna/update?no="+dto.getNo();
 
     }
