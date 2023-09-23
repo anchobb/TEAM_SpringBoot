@@ -273,6 +273,7 @@ public class QnAService {
                 qna.setFilesize(Arrays.toString(newFilesizes));
             }
             else {
+                qna.setDirpath(qna.getDirpath());
                 qna.setFilename(filenames.toString());
                 qna.setFilesize(filesizes.toString());
             }
@@ -280,6 +281,7 @@ public class QnAService {
 
         }
         else {
+            qna.setDirpath(oldQnA.getDirpath());
             qna.setFilename(oldQnA.getFilename());
             qna.setFilesize(oldQnA.getFilesize());
         }
@@ -339,6 +341,13 @@ public class QnAService {
 
         readQnA.setFilename(newFn.toString());
         readQnA.setFilesize(newFn.toString());
+
+        if(readQnA.getFilename().equals("[]")){
+            readQnA.setFilename(null);
+            readQnA.setFilesize(null);
+            readQnA.setDirpath(null);
+        }
+
         readQnA = qnaRepository.save(readQnA);
 
 
@@ -363,6 +372,8 @@ public class QnAService {
             }
             dir.delete();
         }
+
+
         //DB 삭제
         qnaRepository.delete(qna);
 

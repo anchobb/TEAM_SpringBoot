@@ -126,10 +126,12 @@ public class NoticeService {
             }
 
              notice.setDirpath(path);
+
+             notice.setFilename(filenames.toString());
+             notice.setFilesize(filesizes.toString());
+
         }
 
-        notice.setFilename(filenames.toString());
-        notice.setFilesize(filesizes.toString());
 
         notice =    noticeRepository.save(notice);
 
@@ -193,6 +195,13 @@ public class NoticeService {
 
         readNotice.setFilename(newFn.toString());
         readNotice.setFilesize(newFs.toString());
+
+        if(readNotice.getFilename().equals("[]")){
+            readNotice.setFilename(null);
+            readNotice.setFilesize(null);
+            readNotice.setDirpath(null);
+        }
+
         readNotice = noticeRepository.save(readNotice);
 
 
@@ -291,6 +300,7 @@ public class NoticeService {
                 notice.setFilesize(Arrays.toString(newFilesizes));
             }
             else {
+                notice.setDirpath(notice.getDirpath());
                 notice.setFilename(filenames.toString());
                 notice.setFilesize(filesizes.toString());
             }
@@ -298,6 +308,7 @@ public class NoticeService {
 
         }
         else {
+            notice.setDirpath(oldNotice.getDirpath());
             notice.setFilename(oldNotice.getFilename());
             notice.setFilesize(oldNotice.getFilesize());
         }
