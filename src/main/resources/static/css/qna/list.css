@@ -78,6 +78,12 @@
             text-align: center;
         }
 
+        .one--depth>li>a:hover{
+            text-decoration: none;
+            color: black;
+        }
+
+
 .pagenation{
     margin-top:20px;
     margin-bottom:50px;

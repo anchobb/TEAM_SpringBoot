@@ -178,9 +178,17 @@
 
 
                                     <!-- PAGENATION -->
-                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                                        <a class="page-link" th:href="@{/notice/list(pageNo=${i},type=${pageDto.criteria.type},keyword=${pageDto.criteria.keyword} )}" > <span th:text="${i}"></span> </a>
-                                    </li>
+                                    <th:block th:if="${pageDto.criteria.type == null}">
+                                        <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                            <a class="page-link" th:href="@{/notice/list(pageNo=${i})}" ><span th:text="${i}"></span></a>
+                                        </li>
+                                    </th:block>
+
+                                    <th:block th:if="${pageDto.criteria.type != null}">
+                                        <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                            <a class="page-link" th:href="@{/notice/list(pageNo=${i}, type=${pageDto.criteria.type}, keyword=${pageDto.criteria.keyword})}" ><span th:text="${i}"></span></a>
+                                        </li>
+                                    </th:block>
 
 
                                     <!-- NEXT -->

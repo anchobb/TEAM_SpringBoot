@@ -44,7 +44,7 @@
             <div class="Menu_left">
                 <ul class="one--depth">
                     <li>
-                        <a href="">수박차트</a>
+                        <a href="#">수박차트</a>
                         <ul class="two--depth">
                             <li><a href="">국내TOP100</a></li>
                             <li><a href="">해외TOP100</a></li>
@@ -53,7 +53,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="">수박DJ</a>
+                        <a href="#">수박DJ</a>
                         <ul class="two--depth">
                             <li><a href="">#투데이</a></li>
                             <li><a href="">테마장르</a></li>
@@ -61,14 +61,14 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="">수박TV</a>
+                        <a href="#">수박TV</a>
                         <ul class="two--depth">
                             <li><a href="">뮤직비디오</a></li>
                             <li><a href="">수박방송</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="">수박매거진</a>
+                        <a href="#">수박매거진</a>
                         <ul class="two--depth">
                             <li><a href="">오늘의매거진</a></li>
                             <li><a href="">완결매거진</a></li>
@@ -79,7 +79,7 @@
             <div class="Menu_right">
                 <ul class="one--depth">
                     <li>
-                        <a href="">공지사항</a>
+                        <a href="#">공지사항</a>
                         <ul class="two--depth">
                             <li><a href="">공지사항</a></li>
                             <li><a href="">QnA</a></li>
@@ -87,7 +87,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="">마이페이지</a>
+                        <a href="#">마이페이지</a>
                         <ul class="two--depth">
                             <li><a href="">정보수정</a></li>
                             <li><a href="">마이리스트</a></li>
@@ -182,9 +182,17 @@
 
 
                                 <!-- PAGENATION -->
-                                <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"  >
-                                    <a class="page-link" th:href="@{/qna/list(pageNo=${i},type=${pageDto.criteria.type},keyword=${pageDto.criteria.keyword} )}" > <span th:text="${i}"></span> </a>
-                                </li>
+                                <th:block th:if="${pageDto.criteria.type == null}">
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                        <a class="page-link" th:href="@{/qna/list(pageNo=${i})}" ><span th:text="${i}"></span></a>
+                                    </li>
+                                </th:block>
+
+                                <th:block th:if="${pageDto.criteria.type != null}">
+                                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
+                                        <a class="page-link" th:href="@{/qna/list(pageNo=${i}, type=${pageDto.criteria.type}, keyword=${pageDto.criteria.keyword})}" ><span th:text="${i}"></span></a>
+                                    </li>
+                                </th:block>
 
 
                                 <!-- NEXT -->
