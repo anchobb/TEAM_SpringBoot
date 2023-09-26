@@ -24,7 +24,7 @@ public class QnA_post_50 {
                     .title("제목"+i)
                     .content("내용"+i)
                     .filename(null)
-                    .filesize("0")
+                    .filesize(null)
                     .regdate(LocalDate.now())
                     .title("제목"+i)
                     .build();

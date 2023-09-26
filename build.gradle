@@ -60,7 +60,8 @@ dependencies {
 	//MAIL
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-
+	//WebSocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 
 }

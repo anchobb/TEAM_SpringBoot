@@ -24,7 +24,7 @@ public class Notice_post_50 {
                     .content("내용"+i)
                     .dirpath(null)
                     .filename(null)
-                    .filesize("0")
+                    .filesize(null)
                     .regdate(LocalDate.now())
                     .title("제목"+i)
                     .category("안내")
